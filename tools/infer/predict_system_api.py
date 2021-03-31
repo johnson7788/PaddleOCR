@@ -260,18 +260,17 @@ def path():
         #         print(text_str)
             # dt的numpy改成列表格式
         every_res = []
-        for dt, rec in zip(rec_res,dt_boxes):
+        for rec, dt in zip(rec_res,dt_boxes):
             dt = dt.tolist()
             one_res = {
                 "words": rec[0],
-                "confidence": rec[1],
+                "confidence": str(rec[1]),
                 "left_top": dt[0],
                 "right_top": dt[1],
                 "right_bottom":dt[2],
                 "left_bottom":dt[3],
             }
             every_res.append(one_res)
-
         one_data = {
             "image_name": image_file,
             "ocr_result": every_res
@@ -288,4 +287,4 @@ if __name__ == "__main__":
     args.use_angle_cls = True
     args.use_space_char = True
     text_sys = TextSystem(args)
-    app.run(host='0.0.0.0', port=6688, debug=True, threaded=True)
+    app.run(host='0.0.0.0', port=6688, debug=False, threaded=True)
